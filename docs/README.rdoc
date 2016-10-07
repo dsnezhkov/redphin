@@ -1,0 +1,88 @@
+* Sidekiq - for queueing and executing
+* ActiveJob to schedule to Sidekiq
+* crono  - for batch scheduler vai Rails
+
+# To use sidekiq do this (on mac)
+brew install  redis
+redis-server /usr/local/etc/redis.conf
+rails generate job Example
+bundle exec sidekiq -q default -q mailers
+rails runner "ExampleJob.perform_later(11)" && sleep 3 && tail -n 4 log/development.log
+
+
+# whenever
+cd ~/project
+/Users/dimas/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/whenever-0.9.4/bin/wheneverize .
+
+# Crono
+rails generate crono:install
+rails generate job Crono
+#fill in cronotab.rb
+bundle exec crono RAILS_ENV=development
+
+
+Enhancements:
+- hard lock for visits. Currently: soft locks for visits and submissions.
+    - a la (render:nothing).
+    - introduction campaign_lock for Stat record.
+    - introduction choice of web redirect (e.g. to equivalent of post-noficiation page)
+        - development of notification page.
+- logic for batch visits/batch submissions in cronotab or the DelayedJobs, per campaign
+- Reports
+    - Statistics,
+    - CSV raw data export
+    - Graphs
+    - Detail  action timeline per mark
+    - UI Portal?
+- Reworking logger messages
+
+Steps:
+# production (as user rails
+git clone
+RAILS_ENV=production rake db:migrate
+RAILS_ENV=production bundle update
+
+#Start Background:
+redis-server /usr/local/etc/redis.conf #(MAC)
+redis-server /etc/redis/redis.conf #(Ubuntu)
+
+RAILS_ENV=production bundle exec sidekiq -q default -q mailers
+RAILS_ENV=production bundle exec crono
+    /Users/dimas/RubymineProjects/phishaware/config/cronotab.rb governs when jobs are run.
+    override with manual or refer to cronotab (per environment)
+
+service unicorn start
+
+RAILS_ENV=production rake assets:precompile
+
+# Seed from generate
+rake marks:marks_delete['tr_campaign']  && rake marks:generate_marks['tr_campaign',5]  &&  rake marks:email_phish['tr_campaign']
+# Seed from csv
+in data/marks.csv
+rake marks:marks_delete['tr_campaign']  && rake marks:load_marks['/Users/dimas/RubymineProjects/phishaware/data/marks.csv'] && rake marks:email_phish['campaign_tr']
+
+ # Format:
+ #Display Name,Email Address,Complete?,Campaign Name
+ #Dimitry Snezhkov,dsnezhkov@gmail.com,false,campaign_tr
+ #...,...,...,....
+
+## Useful:
+# Email marks (force to re-re-email 'competed')
+RAILS_ENV=production  rake marks:email_phish['campaign_tr',force]
+# DB console
+RAILS_ENV=production rails dbconsole
+# Rails Console
+RAILS_ENV=production rails console
+# CSV Report:
+rake marks:visits_show  && open test.csv
+
+
+
+TODO:
+ - fix defining 'visits' as 'shows' only or 'all visits'
+ - flags for initial mail date
+ - flags for post-nofication already hapening to avoid remailing people every day.
+ - fix logic of not recording locked submissions
+ - synch HTML txt content in mail
+
+

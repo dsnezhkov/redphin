@@ -1,0 +1,22 @@
+Dear <%= @mark.display_name %> ,
+
+You have recently responded to a malicious email sent you as part of Company Security Awareness Program. The email was sent to you from <%= configatron.campaigns.trcampaign.email.message.from %> with the subject of <%= configatron.campaigns.trcampaign.email.message.subject %>
+
+This email contained company-related information and a directive which prompted you to navigate outside of secure Company zone and submit potentially sensitive company information to the 3rd party.
+
+You have visited and attempted to view malicious content on the phishing site <%= pluralize(@shows, "time") %> , and submitted data <%= pluralize(@submissions, "time") %>.
+
+<% if not @submission_hash.empty? %> For example, you have submitted the following information:
+
+    Data Submission Date/Time
+    <% @submission_times.each do |time| %>
+        <%= time %>
+    <% end %> <% @submission_hash.each do |k, v| %>
+        <%= k %> <%= v %>
+    <% end %> <% end %>
+
+Below you can see the timeline of your visits.
+Visit Date/Time
+<% @visit_times.each do |time| %>
+    <%= time %>
+<% end %>

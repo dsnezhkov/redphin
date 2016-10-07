@@ -1,0 +1,66 @@
+<html>
+<head>
+  <title>Phishing Exercise Summary</title>
+  <%= stylesheet_link_tag 'email' %>
+</head>
+
+<body>
+<table class="ui plain blue table">
+  <thead>
+  <tr></tr>
+  </thead>
+  <tbody>
+  <tr class="ui segment">
+    <td colspan="2">
+      <div class="ui message segment">
+        <strong> Dear <%= @mark.display_name %></strong>,
+        <p>
+          You recently received an email asking you to visit an internet website to
+          confirm the completion of your company security training. This communication was sent by Company Information Security as part of an ongoing program
+          to measure employee awareness of social engineering via email (also known as “phishing”).
+        </p>
+
+        <p>
+          The email was sent to you on <%= @mark.created_at.strftime("%m/%d/%Y") %>  with the subject line of
+          <strong> <%= configatron.campaigns.trcampaign.email.message.subject %>.</strong>
+        </p>
+
+        <p>
+          The records indicate that you visited the website <%= pluralize(@visits, "time") %> on the following dates:
+        </p>
+
+        <p>
+        <table class="ui celled compact collapsing table">
+          <thead>
+          <tr>
+            <th>Visit Date/Time</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @visit_times.each do |time| %>
+              <tr>
+                <td><%= time %> </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        </p>
+
+        <% if not @submission_hash.empty? and @valid_submission %>
+            <p>
+              The records also indicate that a valid login ID was entered into the form on the website. <br/>
+            </p>
+        <% end %>
+
+        <p>
+          Company employees must always be on alert for emails that ask you to click on links to unknown websites, or sites that ask you enter sensitive information. You should <u>never</u> disclose your system IDs or passwords to anyone, or enter them on an unknown website. For more information contact your Information Security Program Coordinator.
+        </p>
+
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> <%=configatron.campaigns.trcampaign.web.layout.window.title %> </title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="ui page grid ">
+  <div class="ui row">
+    <div class="sixteen wide column "> </div>
+  </div>
+  <div class="ui two column row">
+    <div class="three wide column ">
+      <%= image_tag configatron.campaigns.trcampaign.web.images.logo.first.location,
+                    size:  configatron.campaigns.trcampaign.web.images.logo.first.size,
+                    alt: configatron.campaigns.trcampaign.web.images.logo.first.name
+            %>
+    </div>
+    <div class="six wide column ">
+      <h1 class="ui large tertiary grey  header"><%= configatron.campaigns.trcampaign.web.layout.headers.first.content %></h1>
+      <div class="ui divider"></div>
+    </div>
+  </div>
+  <div class="ui row">
+    <div class="ui twelve wide inverted column">
+        <%= yield %>
+    </div>
+  </div>
+  <div class="ui sixteen wide column row">
+    <div>&copy;<%= configatron.campaigns.trcampaign.web.layout.footers.copy.content %></div>
+  </div>
+</div>
+
+
+</body>
+</html>

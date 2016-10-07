@@ -1,0 +1,18 @@
+<mjml>
+  <mj-body>
+    <mj-container>
+      <mj-text
+	      padding="20px"
+	      color="#C3c3c3"
+	      font-family="Helvetica"
+	      align="center"
+	      font-size="45"
+	      line-height="45"
+	      font-weight="900">
+
+		Hello <%= @mark.display_name %>
+
+	</mj-text>
+    </mj-container>
+  </mj-body>
+</mjml>

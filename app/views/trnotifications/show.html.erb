@@ -1,0 +1,29 @@
+<div class="ui vertical compact segment">
+  <h2 class="ui centered tertiary blue header"> Employee Training Information Verification </h2>
+
+  <div class="ui blue segment">
+    <div class="ui form vertical compact segment ">
+      <h4 class="ui dividing header">Please enter the following information to certify course completion</h4>
+      <%= form_tag(submit_trnotification_path(@mark.hashid)) do %>
+          <div class="required field">
+            <label>Network ID: </label>
+            <input type="text" name="networkid" placeholder="Enter Network ID">
+
+            <div class="required field">
+              <label>Email Address: </label>
+              <input type='text' name="emailaddress" placeholder="Enter Email Address"/>
+            </div>
+
+            <div class="ui divider"></div>
+            <div class="inline field">
+              <input type='submit' class='ui primary button' value='Submit Information'/>
+              <input type='reset' class='ui  button' value='Clear and Start over'/>
+            </div>
+
+
+      <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

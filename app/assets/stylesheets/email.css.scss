@@ -1,0 +1,14 @@
+@import "semantic-ui/dist/components/grid";
+@import "semantic-ui/dist/components/table";
+@import "semantic-ui/dist/components/segment";
+@import "semantic-ui/dist/components/button";
+
+body {
+  background-color: #dadada !important;
+  width: 80%;
+}
+
+
+.plain {
+  border: 1px solid #dadada !important;
+}

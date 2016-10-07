@@ -1,0 +1,19 @@
+<div class="ui basic segment">
+  <div class="ui huge negative  message">
+    <b>Login Failed (Authentication Failed for: <%= @mark.display_name %> )</b>
+    The information you provided does not match an existing account. Make sure you do not have "CAPS LOCK" turned on.
+    If the problem continues, a network server may be temporarily unavailable. Try again in a few minutes, or contact your helpdesk.
+  </div>
+</div>
+
+<script>
+
+    var count = 1;
+    var timer = setInterval(function() {
+        if (--count < 1) {
+            clearInterval(timer);
+            window.location.href = "<%= url_for :controller => controller.controller_name, :action => 'show', :id => @mark.hashid %>";
+        }
+        //$("#counter").text(count);
+    }, 1000);
+</script>

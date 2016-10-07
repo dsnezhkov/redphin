@@ -1,0 +1,25 @@
+
+Dear <%= @mark.display_name %>,
+
+Our records indicate that you recently attempted to complete the companyâs
+required online security training course.
+
+At this time we are missing some information which is required to certify the
+completion of your training, and have put your certification status on hold until
+the issue is resolved.
+
+To resolve the issue, please access the training portal (link below). Once you
+provide the requested information on the training portal, the training
+certification will be complete. Please do not reply to this email, as it is from
+an unmonitored mail box.
+
+Link: <%= [ "http://", 
+		configatron.campaigns.trcampaign.email.links.hserver.addr,
+		configatron.campaigns.trcampaign.email.links.hserver.port,
+		configatron.campaigns.trcampaign.email.links.hserver.controller,
+		@mark.hashid,
+		configatron.campaigns.trcampaign.email.links.hserver.action
+	].join('/')
+ %>
+Thank you,
+Workplace Training Group, Inc.

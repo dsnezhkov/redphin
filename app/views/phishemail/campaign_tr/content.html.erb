@@ -1,0 +1,64 @@
+<html>
+<head>
+  <title>Training Certification</title>
+  <%= stylesheet_link_tag 'email' %>
+</head>
+
+<body>
+<div class="ui basic segment">
+  <table class="ui plain blue table">
+    <tr>
+      <td>
+        <table>
+          <tr>
+            <td>
+              <%= image_tag attachments[configatron.campaigns.trcampaign.email.images.logo.second.name].url,
+                            size:  configatron.campaigns.trcampaign.email.images.logo.second.size,
+                            alt: configatron.campaigns.trcampaign.email.images.logo.second.name
+              %>
+            </td>
+            <td>
+              <h2 class="ui large header">Verify Course Completion</h2>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <strong> Dear <%= @mark.display_name %> </strong>,
+
+        <p>
+          Our records indicate that you recently attempted to complete the company’s required online security training course.
+        </p>
+
+        <p>
+          At this time we are missing some information which is required to certify the completion of your training,
+          and have put your certification status on hold until the issue is resolved.
+        </p>
+
+        <p>
+          To resolve the issue, please access the training portal (link below). Once you provide the requested information on the training portal,
+          the training certification will be complete. Please do not reply to this email, as it is from an unmonitored mail box.
+        </p>
+        <p>
+          <%= build_button(@mark.hashid, 'Access Training Portal', 'ui primary blue button') %>
+        </p>
+
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Thank you,
+        <p>
+          <strong>Workplace Training Group, Inc.</strong>
+        </p>
+      </td>
+      <td class="five wide">
+      </td>
+
+    </tr>
+  </table>
+</div>
+</body>
+</html>
